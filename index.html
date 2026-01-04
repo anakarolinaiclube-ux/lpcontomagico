@@ -58,7 +58,13 @@
             padding: 0 20px;
         }
 
-        /* --- BOTÕES --- */
+        /* --- BOTÕES COM ANIMAÇÃO DE PULSO --- */
+        @keyframes btnPulse {
+            0% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 192, 72, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 10px 25px rgba(255, 192, 72, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 192, 72, 0.4); }
+        }
+
         .btn {
             display: inline-block;
             background: #FFC048; /* Amarelo ouro */
@@ -68,14 +74,20 @@
             text-decoration: none;
             font-weight: 700;
             font-size: 1rem;
-            box-shadow: 0 5px 15px rgba(255, 192, 72, 0.4);
-            transition: transform 0.2s;
             border: none;
+            /* Aplicando a animação */
+            animation: btnPulse 2s infinite ease-in-out;
+            transition: all 0.3s;
         }
+
+        /* Pause na animação ao passar o mouse para dar feedback de clique */
         .btn:hover {
-            transform: translateY(-3px);
+            animation: none; 
+            transform: translateY(-3px) scale(1.05);
             background: #FFD32A;
+            box-shadow: 0 15px 30px rgba(255, 192, 72, 0.5);
         }
+
         .btn-large {
             font-size: 1.2rem;
             padding: 20px 45px;
@@ -141,9 +153,10 @@
             50% { transform: translateY(-20px) rotate(5deg); }
         }
 
-        /* --- COMO FUNCIONA --- */
+        /* --- COMO FUNCIONA + ANIMAÇÃO PALAVRA "MÁGICA" --- */
         .how-it-works { padding: 80px 0; }
         .steps-container { display: flex; flex-direction: column; gap: 24px; }
+        
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
@@ -155,6 +168,7 @@
             transition: transform 0.3s ease;
         }
         .glass-card:hover { transform: translateY(-5px); background: #fff; }
+        
         .step-number {
             display: inline-block;
             background: var(--primary-gradient);
@@ -163,6 +177,54 @@
             text-align: center; border-radius: 50%;
             font-weight: bold; margin-bottom: 15px;
             font-family: 'Fredoka', sans-serif;
+        }
+
+        /* Estilo da palavra Mágica */
+        .magic-word {
+            position: relative;
+            display: inline-block;
+            color: #764ba2;
+            cursor: default;
+        }
+
+        /* Varinha (Pseudo-elemento) */
+        .magic-word::before {
+            content: '🪄';
+            position: absolute;
+            font-size: 2.5rem;
+            top: -25px;
+            left: -35px;
+            transform-origin: bottom right;
+            animation: wandTap 3s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        /* Brilhos (Pseudo-elemento) */
+        .magic-word::after {
+            content: '✨';
+            position: absolute;
+            font-size: 1.8rem;
+            top: -15px;
+            right: -10px;
+            opacity: 0;
+            animation: sparklePop 3s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        /* Animação da Varinha: Aproxima, Toca (gira), Afasta */
+        @keyframes wandTap {
+            0% { transform: translate(-10px, 0px) rotate(0deg); }
+            40% { transform: translate(5px, 5px) rotate(-15deg); } /* Toca na palavra */
+            60% { transform: translate(5px, 5px) rotate(-15deg); } /* Mantém o toque */
+            100% { transform: translate(-10px, 0px) rotate(0deg); }
+        }
+
+        /* Animação dos Brilhos: Aparecem quando a varinha toca */
+        @keyframes sparklePop {
+            0%, 40% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2) rotate(10deg); }
+            70% { opacity: 0; transform: scale(1.5) rotate(20deg); }
+            100% { opacity: 0; }
         }
 
         /* --- IMAGINAÇÃO --- */
@@ -190,7 +252,7 @@
         .benefits-list li { margin-bottom: 15px; display: flex; gap: 10px; align-items: center; }
         .icon-check { color: #48bb78; font-weight: bold; }
 
-        /* NOVA ANIMAÇÃO DOS BENEFÍCIOS (MORPH) */
+        /* Animação Morph (Mantida) */
         .morph-container {
             flex: 1;
             height: 350px;
@@ -202,8 +264,6 @@
             border-radius: 20px;
             overflow: hidden;
         }
-
-        /* O fundo fluido (Blob) */
         .blob-bg {
             position: absolute;
             width: 250px;
@@ -214,8 +274,6 @@
             opacity: 0.6;
             filter: blur(10px);
         }
-
-        /* Ícones que mudam */
         .icon-stage {
             font-size: 8rem;
             position: absolute;
@@ -223,25 +281,22 @@
             transform: scale(0.5);
             animation: popIn 8s infinite;
         }
-
-        /* Delays para cada ícone aparecer em sequência */
-        .icon-stage:nth-child(2) { animation-delay: 0s; } /* Arvore */
-        .icon-stage:nth-child(3) { animation-delay: 2s; } /* Foguete */
-        .icon-stage:nth-child(4) { animation-delay: 4s; } /* Coroa */
-        .icon-stage:nth-child(5) { animation-delay: 6s; } /* Dino */
+        .icon-stage:nth-child(2) { animation-delay: 0s; }
+        .icon-stage:nth-child(3) { animation-delay: 2s; }
+        .icon-stage:nth-child(4) { animation-delay: 4s; }
+        .icon-stage:nth-child(5) { animation-delay: 6s; }
 
         @keyframes blob-wobble {
             0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(0deg); }
             50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
             100% { border-radius: 50% 50% 20% 80% / 20% 80% 50% 50%; transform: rotate(20deg); }
         }
-
         @keyframes popIn {
             0% { opacity: 0; transform: scale(0.5) translateY(20px); }
-            5% { opacity: 1; transform: scale(1.1) translateY(0); } /* Entrada rapida */
-            10% { opacity: 1; transform: scale(1); } /* Estabiliza */
-            20% { opacity: 1; transform: scale(1); } /* Fica visivel */
-            25% { opacity: 0; transform: scale(1.5); filter: blur(5px); } /* Sai crescendo e sumindo */
+            5% { opacity: 1; transform: scale(1.1) translateY(0); }
+            10% { opacity: 1; transform: scale(1); }
+            20% { opacity: 1; transform: scale(1); }
+            25% { opacity: 0; transform: scale(1.5); filter: blur(5px); }
             100% { opacity: 0; }
         }
 
@@ -308,10 +363,14 @@
         </div>
     </section>
 
-    <!-- COMO FUNCIONA -->
+    <!-- COMO FUNCIONA (Com animação na palavra) -->
     <section class="how-it-works">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 50px; font-size: 2rem;">Mágica em 3 passos</h2>
+            <!-- Animação adicionada no título H2 -->
+            <h2 style="text-align: center; margin-bottom: 50px; font-size: 2rem;">
+                <span class="magic-word">Mágica</span> em 3 passos
+            </h2>
+            
             <div class="steps-container">
                 <div class="glass-card">
                     <span class="step-number">1</span>
@@ -346,7 +405,7 @@
         </div>
     </section>
 
-    <!-- BENEFÍCIOS COM ANIMAÇÃO MORPH -->
+    <!-- BENEFÍCIOS -->
     <section class="benefits">
         <div class="container">
             <div class="benefits-card">
@@ -360,10 +419,9 @@
                     </ul>
                 </div>
                 
-                <!-- Área da Animação -->
+                <!-- Animação Morph -->
                 <div class="morph-container">
                     <div class="blob-bg"></div>
-                    <!-- Elementos que alternam -->
                     <div class="icon-stage">🌲</div>
                     <div class="icon-stage">🚀</div>
                     <div class="icon-stage">👑</div>
