@@ -3,48 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conto Mágico - Histórias Personalizadas para Crianças</title>
+    <title>Starlight - Histórias que Ganham Vida</title>
     
-    <!-- Fontes do Google: Fredoka (Títulos lúdicos) e Nunito (Texto de leitura fácil) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* --- VARIÁVEIS E RESET --- */
+        /* --- VARIÁVEIS E GERAL --- */
         :root {
-            --primary-color: #6C63FF; /* Roxo Mágico */
-            --secondary-color: #FF6584; /* Rosa Diversão */
-            --accent-color: #FFD93D; /* Amarelo Estrela */
-            --text-color: #2D3436;
-            --bg-light: #F9F9FC;
-            --white: #FFFFFF;
-            --hero-bg: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-            --font-heading: 'Fredoka', sans-serif;
-            --font-body: 'Nunito', sans-serif;
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --hero-bg-color: #FF5E57; /* Vermelho Lúdico */
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --text-dark: #2d3748;
+            --radius-lg: 24px;
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+            
+            /* Cores da V1 */
+            --v1-purple-bg: linear-gradient(135deg, #6C63FF 0%, #4834D4 100%);
+            --v1-cta-bg: #FFF4E6;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: var(--font-body);
-            color: var(--text-color);
-            background-color: var(--bg-light);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background: #fdfbfb;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
         h1, h2, h3 {
-            font-family: var(--font-heading);
-            color: var(--primary-color);
+            font-family: 'Fredoka', sans-serif;
+            line-height: 1.2;
+        }
+
+        /* Textura de fundo sutil geral */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 15% 50%, rgba(118, 75, 162, 0.05), transparent 25%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container {
-            max-width: 1100px;
+            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -52,245 +61,202 @@
         /* --- BOTÕES --- */
         .btn {
             display: inline-block;
-            background-color: var(--secondary-color);
-            color: var(--white);
-            padding: 15px 35px;
-            font-family: var(--font-heading);
-            font-size: 1.2rem;
-            font-weight: 600;
+            background: #FFC048; /* Amarelo ouro */
+            color: #4834D4;
+            padding: 16px 32px;
             border-radius: 50px;
             text-decoration: none;
-            box-shadow: 0 6px 0 darken(var(--secondary-color), 20%);
-            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(255, 192, 72, 0.4);
+            transition: transform 0.2s;
             border: none;
-            cursor: pointer;
         }
-
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(255, 101, 132, 0.4);
-            background-color: #ff4769;
+            background: #FFD32A;
         }
-
         .btn-large {
-            font-size: 1.5rem;
-            padding: 20px 50px;
+            font-size: 1.2rem;
+            padding: 20px 45px;
         }
 
         /* --- HERO SECTION --- */
         .hero {
-            position: relative;
-            padding: 100px 0 80px;
+            padding: 140px 0 100px;
             text-align: center;
-            background: #e0c3fc; /* Fallback */
-            background: linear-gradient(180deg, #FFFFFF 0%, #E3F2FD 100%);
+            background-color: var(--hero-bg-color);
+            position: relative;
             overflow: hidden;
-        }
-
-        /* Decoração de fundo (Nuvens/Estrelas CSS) */
-        .hero::before {
-            content: '✨';
-            position: absolute;
-            font-size: 3rem;
-            top: 10%;
-            left: 10%;
-            opacity: 0.5;
-            animation: float 3s infinite ease-in-out;
-        }
-        .hero::after {
-            content: '🚀';
-            position: absolute;
-            font-size: 4rem;
-            bottom: 15%;
-            right: 10%;
-            opacity: 0.8;
-            transform: rotate(-20deg);
-            animation: float 4s infinite ease-in-out reverse;
+            color: white;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            line-height: 1.2;
+            font-size: 2.8rem;
             margin-bottom: 20px;
-            color: #4A4A4A;
-        }
-        
-        .hero h1 span {
-            color: var(--primary-color);
+            color: #FFFFFF;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
             position: relative;
-            display: inline-block;
+            z-index: 2;
         }
 
-        .hero h1 span::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 10px;
-            bottom: 5px;
-            left: 0;
-            background-color: var(--accent-color);
-            z-index: -1;
-            opacity: 0.6;
-            border-radius: 5px;
+        .hero h1 span {
+            color: #5D2E8C;
+            background: #FFD93D;
+            padding: 0 10px;
+            border-radius: 10px;
+            display: inline-block;
+            transform: rotate(-2deg);
         }
 
         .hero p {
-            font-size: 1.3rem;
-            color: #666;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 40px;
             max-width: 600px;
-            margin: 0 auto 40px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Elementos Flutuantes */
+        .floater {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: floatHero 6s infinite ease-in-out;
+            z-index: 1;
+            user-select: none;
+        }
+        .f1 { top: 15%; left: 10%; font-size: 3rem; animation-duration: 8s; }
+        .f2 { top: 20%; right: 15%; font-size: 2rem; animation-duration: 6s; animation-delay: 1s; }
+        .f3 { bottom: 25%; left: 20%; font-size: 2.5rem; animation-duration: 7s; animation-delay: 2s; }
+        .f4 { bottom: 15%; right: 10%; font-size: 1.5rem; animation-duration: 5s; }
+        .f5 { top: 50%; left: 5%; font-size: 2rem; animation-duration: 9s; opacity: 0.2; }
+        .f6 { top: 10%; left: 50%; font-size: 4rem; animation-duration: 10s; opacity: 0.15; }
+
+        @keyframes floatHero {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
         }
 
         /* --- COMO FUNCIONA --- */
-        .how-it-works {
-            padding: 80px 0;
-            background-color: var(--white);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            text-align: center;
-        }
-
-        .step-card {
-            background: #fff;
-            padding: 20px;
-        }
-
-        .step-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            display: inline-block;
-            background: #FFF4E6;
-            width: 100px;
-            height: 100px;
-            line-height: 100px;
-            border-radius: 50%;
-        }
-
-        .step-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        /* --- IMAGINAÇÃO (TEMAS) --- */
-        .imagination {
-            padding: 80px 0;
-            background-color: #F0F4F8;
-        }
-
-        .themes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .theme-card {
-            background: var(--white);
+        .how-it-works { padding: 80px 0; }
+        .steps-container { display: flex; flex-direction: column; gap: 24px; }
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
             padding: 30px;
-            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease;
+        }
+        .glass-card:hover { transform: translateY(-5px); background: #fff; }
+        .step-number {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: white;
+            width: 40px; height: 40px; line-height: 40px;
+            text-align: center; border-radius: 50%;
+            font-weight: bold; margin-bottom: 15px;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* --- IMAGINAÇÃO --- */
+        .imagination {
+            padding: 80px 0 120px;
+            background: var(--primary-gradient);
+            color: white;
             text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-            border: 2px solid transparent;
+            clip-path: ellipse(150% 100% at 50% 100%);
         }
-
-        .theme-card:hover {
-            transform: scale(1.05);
-            border-color: var(--primary-color);
-        }
-
-        .theme-emoji {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            display: block;
+        .themes-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 30px; }
+        .theme-pill {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 24px; border-radius: 50px;
+            font-weight: 500;
         }
 
         /* --- BENEFÍCIOS --- */
-        .benefits {
-            padding: 80px 0;
-            background: var(--white);
+        .benefits { padding: 80px 0; }
+        .benefits-card {
+            background: white; border-radius: var(--radius-lg);
+            padding: 40px; box-shadow: var(--shadow-soft);
+            margin-top: -60px; position: relative; z-index: 2;
         }
+        .benefits-list li { margin-bottom: 15px; display: flex; gap: 10px; align-items: center; }
+        .icon-check { color: #48bb78; font-weight: bold; }
 
-        .benefits-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .benefits-content {
+        /* NOVA ANIMAÇÃO DOS BENEFÍCIOS (MORPH) */
+        .morph-container {
             flex: 1;
-            min-width: 300px;
-            padding-right: 40px;
-        }
-
-        .benefits-list {
-            list-style: none;
-        }
-
-        .benefits-list li {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        .benefits-list li::before {
-            content: '✓';
-            color: var(--white);
-            background-color: #4CD137;
-            font-weight: bold;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            font-size: 0.9rem;
-        }
-
-        .benefits-image {
-            flex: 1;
-            min-width: 300px;
-            background-color: #eee;
             height: 350px;
-            border-radius: 30px;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
-            box-shadow: 15px 15px 0px var(--accent-color);
+            background: #F7FAFC;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        /* O fundo fluido (Blob) */
+        .blob-bg {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: blob-wobble 8s ease-in-out infinite alternate;
+            opacity: 0.6;
+            filter: blur(10px);
+        }
+
+        /* Ícones que mudam */
+        .icon-stage {
+            font-size: 8rem;
+            position: absolute;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: popIn 8s infinite;
+        }
+
+        /* Delays para cada ícone aparecer em sequência */
+        .icon-stage:nth-child(2) { animation-delay: 0s; } /* Arvore */
+        .icon-stage:nth-child(3) { animation-delay: 2s; } /* Foguete */
+        .icon-stage:nth-child(4) { animation-delay: 4s; } /* Coroa */
+        .icon-stage:nth-child(5) { animation-delay: 6s; } /* Dino */
+
+        @keyframes blob-wobble {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(0deg); }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 50% 50% 20% 80% / 20% 80% 50% 50%; transform: rotate(20deg); }
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.5) translateY(20px); }
+            5% { opacity: 1; transform: scale(1.1) translateY(0); } /* Entrada rapida */
+            10% { opacity: 1; transform: scale(1); } /* Estabiliza */
+            20% { opacity: 1; transform: scale(1); } /* Fica visivel */
+            25% { opacity: 0; transform: scale(1.5); filter: blur(5px); } /* Sai crescendo e sumindo */
+            100% { opacity: 0; }
         }
 
         /* --- DEPOIMENTOS --- */
         .testimonials {
             padding: 80px 0;
-            background: linear-gradient(135deg, #6C63FF 0%, #4834D4 100%);
-            color: var(--white);
+            background: var(--v1-purple-bg);
+            color: white;
         }
-
-        .testimonials h2 {
-            color: var(--white);
-            margin-bottom: 50px;
-        }
-
+        .testimonials h2 { color: white; text-align: center; margin-bottom: 50px; font-size: 2.2rem; }
         .testimonial-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
-
         .testimonial-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -298,53 +264,27 @@
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+        .stars { color: #FFD93D; margin-bottom: 10px; }
+        .testimonial-text { font-style: italic; font-size: 1rem; margin-bottom: 20px; }
+        .parent-name { font-weight: 600; font-family: 'Fredoka', sans-serif; }
 
-        .stars {
-            color: var(--accent-color);
-            margin-bottom: 10px;
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-
-        .parent-name {
-            font-weight: bold;
-            font-family: var(--font-heading);
-        }
-
-        /* --- FINAL CTA --- */
+        /* --- CTA FINAL --- */
         .final-cta {
             padding: 100px 0;
             text-align: center;
-            background-color: #FFF4E6;
+            background-color: var(--v1-cta-bg);
+            color: var(--text-dark);
         }
 
-        /* --- FOOTER --- */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #2D3436;
-            color: #aaa;
-            font-size: 0.9rem;
-        }
+        footer { text-align: center; padding: 30px; background: #fff; font-size: 0.9rem; color: #777; }
 
-        /* Animações */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1.1rem; }
-            .benefits-wrapper { flex-direction: column; }
-            .benefits-content { padding-right: 0; margin-bottom: 40px; }
-            .benefits-image { width: 100%; }
+        /* Media Queries */
+        @media (min-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .steps-container { flex-direction: row; }
+            .glass-card { flex: 1; }
+            .imagination { clip-path: ellipse(110% 100% at 50% 100%); }
+            .benefits-card { display: flex; align-items: center; gap: 50px; max-width: 1000px; margin: -60px auto 0; }
         }
     </style>
 </head>
@@ -352,88 +292,84 @@
 
     <!-- HERO SECTION -->
     <section class="hero">
+        <div class="floating-elements">
+            <span class="floater f1">☁️</span>
+            <span class="floater f2">⭐</span>
+            <span class="floater f3">🍃</span>
+            <span class="floater f4">✨</span>
+            <span class="floater f5">⭐</span>
+            <span class="floater f6">☁️</span>
+        </div>
+
         <div class="container">
-            <h1>Onde seu filho se torna o <br> <span>Herói da História</span></h1>
-            <p>Transforme a imaginação em realidade. Crie uma história infantil personalizada, única e mágica em segundos. A aventura começa agora!</p>
-            
+            <h1>Uma história onde sua criança é o(a) <br><span>personagem principal</span></h1>
+            <p>Transforme a imaginação em realidade. Crie uma história infantil personalizada, única e mágica em segundos.</p>
             <a href="#criar" class="btn btn-large">Criar História Agora</a>
-            
-            <!-- Elemento visual ilustrativo (placeholder) -->
-            <div style="margin-top: 50px; font-size: 5rem;">
-                🏰 🐉 👸 🚀
-            </div>
         </div>
     </section>
 
     <!-- COMO FUNCIONA -->
     <section class="how-it-works">
         <div class="container">
-            <h2 class="section-title">Como a mágica acontece ✨</h2>
-            <div class="steps-grid">
-                <div class="step-card">
-                    <span class="step-icon">📝</span>
-                    <h3>1. Personalize</h3>
-                    <p>Conte-nos o nome da criança, a idade e escolha um tema que ela ama.</p>
+            <h2 style="text-align: center; margin-bottom: 50px; font-size: 2rem;">Mágica em 3 passos</h2>
+            <div class="steps-container">
+                <div class="glass-card">
+                    <span class="step-number">1</span>
+                    <h3>Personalize</h3>
+                    <p>Informe o nome, a idade e o que a criança mais ama.</p>
                 </div>
-                <div class="step-card">
-                    <span class="step-icon">🪄</span>
-                    <h3>2. Criamos</h3>
-                    <p>Nossa tecnologia mágica escreve uma história única e exclusiva na hora.</p>
+                <div class="glass-card">
+                    <span class="step-number">2</span>
+                    <h3>Criação</h3>
+                    <p>Nossa tecnologia gera uma aventura exclusiva na hora.</p>
                 </div>
-                <div class="step-card">
-                    <span class="step-icon">📖</span>
-                    <h3>3. Leiam Juntos</h3>
-                    <p>Receba digitalmente e vivam momentos inesquecíveis de leitura.</p>
+                <div class="glass-card">
+                    <span class="step-number">3</span>
+                    <h3>Leitura</h3>
+                    <p>Receba digitalmente e vivam momentos inesquecíveis.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO DE IMAGINAÇÃO -->
+    <!-- IMAGINAÇÃO -->
     <section class="imagination">
         <div class="container">
-            <h2 class="section-title">Qual será a próxima aventura?</h2>
-            <p style="text-align: center; max-width: 600px; margin: 0 auto;">Não há limites para a imaginação. Do fundo do mar às galáxias distantes, seu filho é quem comanda.</p>
-            
+            <h2>Onde vamos hoje?</h2>
             <div class="themes-grid">
-                <div class="theme-card">
-                    <span class="theme-emoji">🦕</span>
-                    <h3>Era dos Dinossauros</h3>
-                </div>
-                <div class="theme-card">
-                    <span class="theme-emoji">🧚‍♀️</span>
-                    <h3>Floresta Encantada</h3>
-                </div>
-                <div class="theme-card">
-                    <span class="theme-emoji">🚀</span>
-                    <h3>Viagem Espacial</h3>
-                </div>
-                <div class="theme-card">
-                    <span class="theme-emoji">🐠</span>
-                    <h3>Fundo do Mar</h3>
-                </div>
+                <div class="theme-pill">🌲 Floresta Mágica</div>
+                <div class="theme-pill">🚀 Espaço Sideral</div>
+                <div class="theme-pill">👑 Reino Encantado</div>
+                <div class="theme-pill">🦖 Ilha dos Dinos</div>
+                <div class="theme-pill">🐠 Fundo do Mar</div>
             </div>
         </div>
     </section>
 
-    <!-- POR QUE AS CRIANÇAS AMAM -->
+    <!-- BENEFÍCIOS COM ANIMAÇÃO MORPH -->
     <section class="benefits">
-        <div class="container benefits-wrapper">
-            <div class="benefits-content">
-                <h2 style="margin-bottom: 30px;">Por que é especial? ❤️</h2>
-                <ul class="benefits-list">
-                    <li>Seu filho é o protagonista (ele ama ver o próprio nome!)</li>
-                    <li>Nenhuma história é igual a outra</li>
-                    <li>Linguagem segura e adequada para cada idade</li>
-                    <li>Estimula o hábito da leitura e a criatividade</li>
-                    <li>Perfeito para a hora de dormir</li>
-                </ul>
-                <div style="margin-top: 30px;">
-                    <a href="#criar" class="btn">Quero Criar uma História</a>
+        <div class="container">
+            <div class="benefits-card">
+                <div style="flex: 1;">
+                    <h2 style="margin-bottom: 20px; color: #2d3748;">Por que é inesquecível?</h2>
+                    <ul class="benefits-list">
+                        <li><span class="icon-check">✓</span> Protagonismo: A criança se vê na aventura.</li>
+                        <li><span class="icon-check">✓</span> Educação: Vocabulário adaptado à idade.</li>
+                        <li><span class="icon-check">✓</span> Exclusividade: Nenhuma história é igual.</li>
+                        <li><span class="icon-check">✓</span> Conexão: Ideal para ler antes de dormir.</li>
+                    </ul>
                 </div>
-            </div>
-            <div class="benefits-image" role="img" aria-label="Criança lendo livro feliz">
-                <!-- A imagem é carregada via CSS background -->
+                
+                <!-- Área da Animação -->
+                <div class="morph-container">
+                    <div class="blob-bg"></div>
+                    <!-- Elementos que alternam -->
+                    <div class="icon-stage">🌲</div>
+                    <div class="icon-stage">🚀</div>
+                    <div class="icon-stage">👑</div>
+                    <div class="icon-stage">🦖</div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -441,22 +377,22 @@
     <!-- DEPOIMENTOS -->
     <section class="testimonials">
         <div class="container">
-            <h2 class="section-title">O que os pais dizem</h2>
+            <h2>O que os pais dizem</h2>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <div class="stars">⭐⭐⭐⭐⭐</div>
                     <p class="testimonial-text">"A cara do Lucas quando viu que o astronauta da história tinha o nome dele não tem preço! Lemos todas as noites."</p>
-                    <p class="parent-name">Fernanda M., mãe do Lucas (5 anos)</p>
+                    <p class="parent-name">Fernanda M., mãe do Lucas</p>
                 </div>
                 <div class="testimonial-card">
                     <div class="stars">⭐⭐⭐⭐⭐</div>
                     <p class="testimonial-text">"Simplesmente mágico. Ele não gostava de ler, mas agora pede para criar uma 'aventura nova' todo dia."</p>
-                    <p class="parent-name">Roberto S., pai do Davi (7 anos)</p>
+                    <p class="parent-name">Roberto S., pai do Davi</p>
                 </div>
                 <div class="testimonial-card">
                     <div class="stars">⭐⭐⭐⭐⭐</div>
                     <p class="testimonial-text">"É muito fácil de usar e as histórias são lindas, com lições de moral muito bonitas. Recomendo!"</p>
-                    <p class="parent-name">Carla J., mãe da Sofia (4 anos)</p>
+                    <p class="parent-name">Carla J., mãe da Sofia</p>
                 </div>
             </div>
         </div>
@@ -465,8 +401,8 @@
     <!-- CTA FINAL -->
     <section class="final-cta" id="criar">
         <div class="container">
-            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Pronto para começar a aventura?</h2>
-            <p style="font-size: 1.2rem; margin-bottom: 40px; color: #555;">Crie memórias que duram para sempre. É rápido, fácil e mágico.</p>
+            <h2 style="font-size: 2.2rem; margin-bottom: 20px;">Pronto para começar a aventura?</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 40px; color: #555;">Crie memórias que duram para sempre. É rápido, fácil e mágico.</p>
             <a href="#" class="btn btn-large">Começar Minha História ➜</a>
             <p style="margin-top: 20px; font-size: 0.9rem; color: #888;">✨ Entrega imediata via digital</p>
         </div>
@@ -474,7 +410,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Conto Mágico. Todos os direitos reservados. Feito com ❤️ e imaginação.</p>
+            <p>&copy; 2024 Starlight Stories. Todos os direitos reservados.</p>
         </div>
     </footer>
 
